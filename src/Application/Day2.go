@@ -13,7 +13,6 @@ type Day2 struct {
 }
 
 func (d *Day2) Part1(input *bufio.Scanner) error {
-	return nil
 	d.parseInput(input)
 
 	numSafe := 0
