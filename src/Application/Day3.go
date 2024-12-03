@@ -56,7 +56,7 @@ func (d *Day3) parseInput(input *bufio.Scanner) {
 	for input.Scan() {
 		line := input.Text()
 
-		matches := expr.FindAllString(line, 999)
+		matches := expr.FindAllString(line, -1)
 		for _, match := range matches {
 			matchNums := mulExp.FindStringSubmatch(match)
 			if len(matchNums) > 0 {
