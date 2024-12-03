@@ -12,6 +12,7 @@ func main() {
 	daysRepo := Repository.NewDaysRepository("./input/")
 	_ = daysRepo.Add(1, &Application.Day1{})
 	_ = daysRepo.Add(2, &Application.Day2{})
+	_ = daysRepo.Add(3, &Application.Day3{})
 	/*_ = daysRepo.Add(2, Application.NewDay2(12, 13, 14))*/
 
 	if len(os.Args) > 1 {
