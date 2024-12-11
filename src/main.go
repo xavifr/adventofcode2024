@@ -20,6 +20,7 @@ func main() {
 	_ = daysRepo.Add(8, &Application.Day8{})
 	_ = daysRepo.Add(9, &Application.Day9{})
 	_ = daysRepo.Add(10, &Application.Day10{})
+	_ = daysRepo.Add(11, &Application.Day11{})
 	/*_ = daysRepo.Add(2, Application.NewDay2(12, 13, 14))*/
 
 	if len(os.Args) > 1 {
