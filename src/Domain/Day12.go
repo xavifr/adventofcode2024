@@ -14,7 +14,78 @@ func (d *D12Point) GetNeighbors() []D12Point {
 }
 
 type D12Region struct {
-	Cells []D12Point
+	Cells map[D12Point]bool
+}
+
+func (d *D12Region) GetArea() int {
+	return len(d.Cells)
+}
+
+func (d *D12Region) GetPerimeter() int {
+	perimeter := 0
+	for point, _ := range d.Cells {
+		for _, neigh := range point.GetNeighbors() {
+			if _, ok := d.Cells[neigh]; !ok {
+				perimeter++
+			}
+		}
+	}
+
+	return perimeter
+}
+
+func (d *D12Region) GetSides() int {
+	sides := 0
+
+	cells := make(map[D12Point]bool, 0)
+	for k, v := range d.Cells {
+		cells[k] = v
+	}
+
+	for element := range d.Cells {
+		if !cells[D12Point{element.X, element.Y + 1}] && !cells[D12Point{element.X + 1, element.Y}] {
+			sides++
+		}
+
+		if !cells[D12Point{element.X, element.Y + 1}] && !cells[D12Point{element.X - 1, element.Y}] {
+			sides++
+		}
+
+		if !cells[D12Point{element.X, element.Y - 1}] && !cells[D12Point{element.X - 1, element.Y}] {
+			sides++
+		}
+
+		if !cells[D12Point{element.X, element.Y - 1}] && !cells[D12Point{element.X + 1, element.Y}] {
+			sides++
+		}
+
+		if cells[D12Point{element.X, element.Y + 1}] && cells[D12Point{element.X + 1, element.Y}] && !cells[D12Point{element.X + 1, element.Y + 1}] {
+			sides++
+		}
+		if cells[D12Point{element.X, element.Y + 1}] && cells[D12Point{element.X - 1, element.Y}] && !cells[D12Point{element.X - 1, element.Y + 1}] {
+			sides++
+		}
+
+		if cells[D12Point{element.X, element.Y - 1}] && cells[D12Point{element.X + 1, element.Y}] && !cells[D12Point{element.X + 1, element.Y - 1}] {
+			sides++
+		}
+
+		if cells[D12Point{element.X, element.Y - 1}] && cells[D12Point{element.X - 1, element.Y}] && !cells[D12Point{element.X - 1, element.Y - 1}] {
+			sides++
+		}
+
+	}
+
+	return sides
+}
+
+func popElement(slice map[D12Point]bool) (D12Point, bool) {
+	for key := range slice {
+		delete(slice, key)
+		return key, true
+	}
+
+	return D12Point{}, false
 }
 
 type D12Cell struct {
@@ -24,6 +95,16 @@ type D12Cell struct {
 
 type D12Map struct {
 	Map map[D12Point]*D12Cell
+}
+
+func (d *D12Map) GetFirstNonVisited() *D12Point {
+	for point, cell := range d.Map {
+		if !cell.Visited {
+			return &point
+		}
+	}
+
+	return nil
 }
 
 func (d *D12Map) GetChar(point D12Point) rune {
@@ -46,9 +127,11 @@ func (d *D12Map) GetNeighbors(point D12Point) []D12Point {
 		}
 	}
 
-	// TODO: set actual point as visited
-
 	return points
+}
+
+func (d *D12Map) SetVisited(point D12Point) {
+	d.Map[point].Visited = true
 }
 
 func NewD12Map() D12Map {
