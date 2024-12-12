@@ -144,7 +144,6 @@ func (d *D6Map) MoveGuard() error {
 		} else if d.GuardCanMove() {
 			d.Guard.Move()
 			if d.Points[d.Guard.Y][d.Guard.X] == D6_EMPTY {
-
 				d.Points[d.Guard.Y][d.Guard.X] = D6Object(d.Guard.Direction)
 				d.VisitedPonts++
 			}
