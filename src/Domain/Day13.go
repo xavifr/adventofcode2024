@@ -12,23 +12,13 @@ type D13Prize struct {
 	ButtonB D13Vector
 }
 
-func (d *D13Prize) ResolvePart2() (int, int, bool) {
-	minB := ((float64(10000000000000+d.Y) * float64(d.ButtonA.X)) - (float64(d.ButtonA.Y) * float64(10000000000000+d.X))) / ((-1 * float64(d.ButtonA.Y) * float64(d.ButtonB.X)) + (float64(d.ButtonA.X) * float64(d.ButtonB.Y)))
 
-	if minB != math.Floor(minB) {
-		return 0, 0, false
+func (d D13Prize) Resolve(withExtraCost bool) (int, int, bool) {
+	if withExtraCost {
+		d.Y += 10000000000000
+		d.X += 10000000000000
 	}
 
-	minA := (float64(10000000000000+d.X) - float64(d.ButtonB.X)*minB) / float64(d.ButtonA.X)
-
-	if minA != math.Floor(minA) {
-		return 0, 0, false
-	}
-
-	return int(minA), int(minB), true
-}
-
-func (d *D13Prize) ResolvePart1() (int, int, bool) {
 	minB := ((float64(d.Y) * float64(d.ButtonA.X)) - (float64(d.ButtonA.Y) * float64(d.X))) / ((-1 * float64(d.ButtonA.Y) * float64(d.ButtonB.X)) + (float64(d.ButtonA.X) * float64(d.ButtonB.Y)))
 
 	if minB != math.Floor(minB) {

@@ -17,7 +17,7 @@ func (d *Day13) Part1(input *bufio.Scanner) error {
 
 	sumCoins := 0
 	for _, prize := range d.prizes {
-		if minA, minB, possible := prize.ResolvePart1(); possible && minA <= 100 && minB <= 100 {
+		if minA, minB, possible := prize.Resolve(false); possible && minA <= 100 && minB <= 100 {
 			sumCoins += 3*minA + 1*minB
 		}
 	}
@@ -32,7 +32,7 @@ func (d *Day13) Part2(input *bufio.Scanner) error {
 
 	sumCoins := 0
 	for _, prize := range d.prizes {
-		if minA, minB, possible := prize.ResolvePart2(); possible {
+		if minA, minB, possible := prize.Resolve(true); possible {
 			sumCoins += 3*minA + 1*minB
 		}
 	}
