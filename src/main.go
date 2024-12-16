@@ -24,7 +24,8 @@ func main() {
 	_ = daysRepo.Add(12, &Application.Day12{})
 	_ = daysRepo.Add(13, &Application.Day13{})
 	_ = daysRepo.Add(14, &Application.Day14{})
-	//_ = daysRepo.Add(15, &Application.Day15{})
+	_ = daysRepo.Add(15, &Application.Day15{})
+	_ = daysRepo.Add(16, &Application.Day16{})
 	/*_ = daysRepo.Add(2, Application.NewDay2(12, 13, 14))*/
 
 	if len(os.Args) > 1 {
