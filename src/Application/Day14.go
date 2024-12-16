@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 type Day14 struct {
@@ -32,14 +33,28 @@ func (d *Day14) Part2(input *bufio.Scanner) error {
 
 	d.parseInput(input)
 
-	d.Bathroom.Print()
+	if d.Bathroom.Size.X == 11 {
+		return nil
+	}
 
 	cycles := 0
-	for cycles < 1000 {
-		fmt.Printf("Cycles : %d\n", cycles)
+	for cycles < 10000 {
+		if cycles%1000 == 0 {
+			fmt.Printf("Cycles : %d\n", cycles)
+		}
+
 		d.Bathroom.Move()
-		d.Bathroom.Print()
 		cycles++
+
+		if cycles > 6390 {
+			print := d.Bathroom.Print()
+			if strings.Contains(print, "####################") {
+				fmt.Printf("Cycles : %d\n", cycles)
+				fmt.Println(print)
+				break
+			}
+		}
+
 		//time.Sleep(25 * time.Millisecond)
 	}
 

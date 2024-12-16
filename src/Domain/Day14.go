@@ -46,17 +46,20 @@ func (d *D14Bathroom) Calc() int {
 	return q1 * q2 * q3 * q4
 }
 
-func (d *D14Bathroom) Print() {
+func (d *D14Bathroom) Print() string {
+	out := ""
 	for y := 0; y < d.Size.Y; y++ {
 		for x := 0; x < d.Size.X; x++ {
 			if _, ok := d.Robots[D14Point{X: x, Y: y}]; ok {
-				print("#")
+				out += "#"
 			} else {
-				print(".")
+				out += "."
 			}
 		}
-		print("\n")
+		out += "\n"
 	}
+
+	return out
 }
 
 func (d *D14Bathroom) Move() {
