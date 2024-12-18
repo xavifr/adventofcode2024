@@ -35,6 +35,7 @@ func (d *Day17) Part1(input *bufio.Scanner) error {
 
 func (d *Day17) Part2(input *bufio.Scanner) error {
 	// based on https://github.com/michel-kraemer/adventofcode-rust/blob/main/2024/day17/src/main.rs
+	
 	d.parseInput(input)
 
 	if len(d.Machine.Program) == 6 { // skip demo
