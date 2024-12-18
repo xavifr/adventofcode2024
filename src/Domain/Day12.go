@@ -6,10 +6,10 @@ type D12Point struct {
 
 func (d *D12Point) GetNeighbors() []D12Point {
 	return []D12Point{
-		D12Point{X: d.X + 1, Y: d.Y},
-		D12Point{X: d.X - 1, Y: d.Y},
-		D12Point{X: d.X, Y: d.Y + 1},
-		D12Point{X: d.X, Y: d.Y - 1},
+		{X: d.X + 1, Y: d.Y},
+		{X: d.X - 1, Y: d.Y},
+		{X: d.X, Y: d.Y + 1},
+		{X: d.X, Y: d.Y - 1},
 	}
 }
 
@@ -23,7 +23,7 @@ func (d *D12Region) GetArea() int {
 
 func (d *D12Region) GetPerimeter() int {
 	perimeter := 0
-	for point, _ := range d.Cells {
+	for point := range d.Cells {
 		for _, neigh := range point.GetNeighbors() {
 			if _, ok := d.Cells[neigh]; !ok {
 				perimeter++
@@ -77,15 +77,6 @@ func (d *D12Region) GetSides() int {
 	}
 
 	return sides
-}
-
-func popElement(slice map[D12Point]bool) (D12Point, bool) {
-	for key := range slice {
-		delete(slice, key)
-		return key, true
-	}
-
-	return D12Point{}, false
 }
 
 type D12Cell struct {

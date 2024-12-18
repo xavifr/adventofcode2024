@@ -131,13 +131,14 @@ func (d *D17Machine) opJNZ(oper int) {
 
 	d.IP = opA
 }
-func (d *D17Machine) opBXC(oper int) {
+func (d *D17Machine) opBXC(_ int) {
 	d.incInstructionRegister()
 	opA := d.RegB
 	opB := d.RegC
 
 	d.RegB = opA ^ opB
 }
+
 func (d *D17Machine) opOUT(oper int) {
 	d.incInstructionRegister()
 	opA, state := d.getComboOperand(oper)

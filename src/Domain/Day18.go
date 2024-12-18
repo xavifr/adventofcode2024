@@ -6,10 +6,10 @@ type D18Point struct {
 
 func (d *D18Point) GetNeighbors() []D18Point {
 	return []D18Point{
-		D18Point{X: d.X + 1, Y: d.Y},
-		D18Point{X: d.X - 1, Y: d.Y},
-		D18Point{X: d.X, Y: d.Y + 1},
-		D18Point{X: d.X, Y: d.Y - 1},
+		{X: d.X + 1, Y: d.Y},
+		{X: d.X - 1, Y: d.Y},
+		{X: d.X, Y: d.Y + 1},
+		{X: d.X, Y: d.Y - 1},
 	}
 }
 
