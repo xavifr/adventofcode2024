@@ -34,7 +34,12 @@ func (d *Day18) Part1(input *bufio.Scanner) error {
 func (d *Day18) Part2(input *bufio.Scanner) error {
 	d.parseInput(input)
 
-	corruptedBytes := 0
+	var corruptedBytes int
+	if len(d.RAM.CorruptionOrder) < 40 { // skip demo
+		corruptedBytes = 12
+	} else {
+		corruptedBytes = 1024
+	}
 
 	for {
 		corruptedBytes++
